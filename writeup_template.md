@@ -23,25 +23,15 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of multi steps. First, I converted the color space to hls. I learned in the past that this color space is more usefull for lane detection than the rgb. Then I filtered all white and yellow pixels from the image and converted the resulted image to grayscale. I used the canny edge detection and I created a four point region of interest in the bottom of the image. I tried a canny edge detection with adaptive threshold values, but I did not found usefull parameters.
+In the ROI I did the hough transformation. Last, I fitted a 1D polynom to the hough lines.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
+I did not modifie the draw_lines() function himself but I modified the start and end point of both lines. They will drawn from the bottom of the image to 0.6 * image height.
 
 
-### 2. Identify potential shortcomings with your current pipeline
+### 2. Suggest possible improvements to your pipeline
 
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
-
-### 3. Suggest possible improvements to your pipeline
-
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+I tried moredimensional polynomical fitting on the hough lines but I did not success. I think there is a potential to get better results. So we could get a curve instead of a line.
+Maybe with better parameters adaptive canny threshold parameters could lead to better results.
+Maybe an outlier filter used on the line slopes could delete some unintended lines.
